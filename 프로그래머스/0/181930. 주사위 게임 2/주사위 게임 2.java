@@ -1,14 +1,15 @@
 class Solution {
     public int solution(int a, int b, int c) {
-        int answer = 0;
-        if(!(a == b) && !(b == c) && !(a == c)) {
-            answer = a + b + c;
-        } else if(a == b && b == c) {
-            answer = ((3 * a) * (3 * a * a) * (3 * a * a * a));
-        } else {
-            answer = ((a + b + c) * (a * a + b * b + c * c));
-        }
+        int sum1 = a + b + c;
+        int sum2 = a*a + b*b + c*c;
+        int sum3 = a*a*a + b*b*b + c*c*c;
 
-        return answer;
+        if (a == b && b == c) {
+            return sum1 * sum2 * sum3;
+        } else if (a == b || b == c || a == c) {
+            return sum1 * sum2;
+        } else {
+            return sum1;
+        }
     }
 }
