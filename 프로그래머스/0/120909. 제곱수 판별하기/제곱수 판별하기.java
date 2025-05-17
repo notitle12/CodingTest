@@ -1,14 +1,6 @@
 class Solution {
     public int solution(int n) {
-        int answer = 0;
-        for(int i=0; i<n; i++) {
-            if(i*i == n) {
-                answer = 1;
-                break;
-            } else {
-                answer = 2;
-            }
-        }
-        return answer;
+        int sqrt = (int) Math.sqrt(n);
+        return (sqrt * sqrt == n) ? 1 : 2;
     }
 }
