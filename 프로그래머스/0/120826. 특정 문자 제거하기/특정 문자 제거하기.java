@@ -1,16 +1,5 @@
 class Solution {
     public String solution(String my_string, String letter) {
-        char[] charArray = my_string.toCharArray();
-        char ch = letter.charAt(0);
-        
-        StringBuilder answer = new StringBuilder();
-        
-        for (int i = 0; i < charArray.length; i++) {
-            if (charArray[i] != ch) {
-                answer.append(charArray[i]);
-            }
-        }
-
-        return answer.toString();
+        return my_string.replace(letter, "");
     }
 }
