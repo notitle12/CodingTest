@@ -3,47 +3,39 @@ import java.util.Map;
 
 class Solution {
     public String solution(String[] survey, int[] choices) {
-        char[] types1 = {'R', 'C', 'J', 'A'};
-        char[] types2 = {'T', 'F', 'M', 'N'};
-        
         Map<Character, Integer> scores = new HashMap<>();
-        for(char c : "RTCFJMAN".toCharArray()) {
+        for (char c : "RTCFJMAN".toCharArray())
             scores.put(c, 0);
-        }
-        
+
         for (int i = 0; i < survey.length; i++) {
             String s = survey[i];
             int choice = choices[i];
-            
+
             if (choice == 4) continue;
-            
-            int score = 0;
+            int score = Math.abs(choice - 4);
+
             if (choice < 4) {
-                score = 4 - choice;
-                char disagreeType = s.charAt(0);
-                scores.put(disagreeType, scores.get(disagreeType) + score);
+                char c = s.charAt(0);
+                scores.put(c, scores.get(c) + score);
             } else {
-                score = choice - 4;
-                char agreeType = s.charAt(1);
-                scores.put(agreeType, scores.get(agreeType) + score);
+                char c = s.charAt(1);
+                scores.put(c, scores.get(c) + score);
             }
         }
-        
-        StringBuilder answer = new StringBuilder();
-        
-        for (int i = 0; i < 4; i++) {
-            char t1 = types1[i];
-            char t2 = types2[i];
-            int score1 = scores.get(t1);
-            int score2 = scores.get(t2);
-            
-            if (score1 >= score2) {
-                answer.append(t1);
-            } else {
-                answer.append(t2);
-            }
+
+        char[][] types = {{'R','T'}, {'C','F'}, {'J','M'}, {'A','N'}};
+        StringBuilder result = new StringBuilder();
+
+        for (char[] pair : types) {
+            char left = pair[0], right = pair[1];
+            int leftScore = scores.get(left);
+            int rightScore = scores.get(right);
+
+            if (leftScore >= rightScore)
+                result.append(left);
+            else
+                result.append(right);
         }
-        
-        return answer.toString();
+        return result.toString();
     }
 }
