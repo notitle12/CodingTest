@@ -1,28 +1,12 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 class Solution {
     public int[] solution(int[] arr, int divisor) {
-        ArrayList<Integer> list = new ArrayList<>();
-        
-        for(int num : arr) {
-            if(num % divisor == 0) {
-                list.add(num);
-            }
-        }
+        int[] result = Arrays.stream(arr)
+                .filter(num -> num % divisor == 0)
+                .sorted()
+                .toArray();
 
-        if (list.isEmpty()) {
-            return new int[]{-1};
-        }
-        
-        Collections.sort(list);
-        
-        int[] answer = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            answer[i] = list.get(i);
-        }
-        
-        return answer;
+        return result.length == 0 ? new int[]{-1} : result;
     }
 }
