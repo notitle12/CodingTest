@@ -1,15 +1,17 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] numbers) {
-        int answer = 0;
-        int max = Integer.MIN_VALUE;
-        int length = numbers.length;
-        for(int i = 0; i < length - 1; i++) {
-            for(int j = i + 1; j < length; j++) {
-                if(numbers[i] * numbers[j] > max)
-                max = numbers[i] * numbers[j];
-                answer = max;
-            }
+        int index = numbers.length - 1;
+        Arrays.sort(numbers);
+        
+        int min_min = numbers[0] * numbers[1];
+        int max_max = numbers[index] * numbers[index - 1];
+        
+        if(min_min < max_max) {
+            return max_max;
+        } else {
+            return min_min;
         }
-        return answer;
     }
 }
