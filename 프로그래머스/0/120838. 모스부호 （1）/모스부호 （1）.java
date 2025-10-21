@@ -1,21 +1,26 @@
+import java.util.*;
+
 class Solution {
     public String solution(String letter) {
-        String[] morse = {
-            ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", 
-            ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.",
-            "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."
-        };
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-
         StringBuilder answer = new StringBuilder();
+        String[] Codes = {
+            ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+            "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
+            "..-", "...-", ".--", "-..-", "-.--", "--.."
+        };
         
-        for (String morseCode : letter.split(" ")) {
-            for (int i = 0; i < morse.length; i++) {
-                if (morse[i].equals(morseCode)) {
-                    answer.append(alphabet[i]);
-                    break;
-                }
-            }
+        Map<String, String> map = new HashMap<>();
+        
+        for (int i = 0; i < Codes.length; i++) {
+            String en = String.valueOf((char) ('a' + i));
+
+            map.put(Codes[i], en);
+        }
+        
+        String[] morseArray = letter.split(" ");
+        
+        for (String Code : morseArray) {
+            answer.append(map.get(Code));
         }
         
         return answer.toString();
