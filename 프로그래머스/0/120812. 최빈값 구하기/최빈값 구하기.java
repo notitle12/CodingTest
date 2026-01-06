@@ -2,25 +2,21 @@ class Solution {
     public int solution(int[] array) {
         int[] counts = new int[1000];
         int maxCount = 0;
-        int mode = -1;
-        boolean isUnique = true;
-        
+        int answer = 0;
+
         for (int num : array) {
             counts[num]++;
-            maxCount = Math.max(maxCount, counts[num]);
         }
 
         for (int i = 0; i < counts.length; i++) {
-            if (counts[i] == maxCount) {
-                if (mode == -1) {
-                    mode = i;
-                } else {
-                    isUnique = false;
-                    break;
-                }
+            if (counts[i] > maxCount) {
+                maxCount = counts[i];
+                answer = i;
+            } else if (counts[i] == maxCount) {
+                answer = -1;
             }
         }
 
-        return isUnique ? mode : -1;
+        return answer;
     }
 }
